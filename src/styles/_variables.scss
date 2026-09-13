@@ -1,0 +1,47 @@
+:root {
+  // colors
+  --color-primary: #313237;
+  --color-secondary: #89939A;
+  --color-icons: #B4BDC3;
+  --color-elements: #E2E6E9;
+  --color-hover-bg: #FAFBFC;
+  --color-white: #FFF;
+  --color-green: #27AE60;
+  --color-red: #EB5757;
+
+  // font
+  --font-family: 'Mont', sans-serif;
+
+  // font sz
+  --fs-h1: 48px;
+  --lh-h1: 56px;
+  --fs-h2: 32px;
+  --lh-h2: 41px;
+  --fs-h3: 22px;
+  --lh-h3: 31px;
+  --fs-h4: 20px;
+  --lh-h4: 26px;
+  --fs-uppercase: 12px;
+  --lh-uppercase: 11px;
+  --fs-buttons: 14px;
+  --lh-buttons: 21px;
+  --fs-body: 14px;
+  --lh-body: 21px;
+  --fs-small: 12px;
+  --lh-small: 15px;
+
+  // layout
+  --container-width: 1200px;
+  --transition-duration: 0.3s;
+}
+
+@media (max-width: 639px) {
+  :root {
+    --fs-h1: 32px;
+    --lh-h1: 41px;
+    --fs-h2: 22px;
+    --lh-h2: 31px;
+    --fs-h4: 16px;
+    --lh-h4: 20px;
+  }
+}
