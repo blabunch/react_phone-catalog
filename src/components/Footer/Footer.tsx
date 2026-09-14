@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Icon } from '../Icon/Icon';
 import styles from './Footer.module.scss';
 
 export const Footer = () => {
@@ -13,12 +14,12 @@ export const Footer = () => {
           NICE<span className={styles.logoAccent}>⚡</span>GADGETS
         </Link>
 
-        <nav className={styles.navLink}>
+        <nav className={styles.nav}>
           <a
             href="https://github.com/blabunch/react_phone-catalog"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.link}
+            className={styles.navLink}
           >
             GitHub
           </a>
@@ -31,13 +32,14 @@ export const Footer = () => {
         </nav>
 
         <div className={styles.backToTop}>
-          <span className={styles.backToTopText}> Back to Top</span>
+          <span className={styles.backToTopText}>Back to top</span>
           <button
             type="button"
             className={styles.backToTopButton}
             onClick={scrollToTop}
+            aria-label="Back to top"
           >
-            ↑
+            <Icon name="chevronUp" />
           </button>
         </div>
       </div>

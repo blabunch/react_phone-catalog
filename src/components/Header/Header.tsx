@@ -3,16 +3,33 @@ import { NavLink } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
 import styles from './Header.module.scss';
 
-const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`;
+const NavItem = ({
+  to,
+  end,
+  children,
+}: {
+  to: string;
+  end?: boolean;
+  children: string;
+}) => (
+  <NavLink
+    to={to}
+    end={end}
+    className={({ isActive }) =>
+      `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
+    }
+  >
+    <span className={styles.navLinkText}>{children}</span>
+  </NavLink>
+);
 
 const getMobileNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   `${styles.mobileNavLink} ${isActive ? styles.mobileNavLinkActive : ''}`;
 
 export const Header = () => {
-  const [isMenuOpen, setIsMenuIsOpen] = useState(false);
+  const [isMenuOpen, setMenuIsOpen] = useState(false);
 
-  const closeMenu = () => setIsMenuIsOpen(false);
+  const closeMenu = () => setMenuIsOpen(false);
 
   return (
     <>
@@ -24,32 +41,28 @@ export const Header = () => {
             </NavLink>
 
             <nav className={styles.nav}>
-              <NavLink to="/" end className={getNavLinkClass}>
+              <NavItem to="/" end>
                 Home
-              </NavLink>
-              <NavLink to="/phones" className={getNavLinkClass}>
-                Phones
-              </NavLink>
-              <NavLink to="/tablets" className={getNavLinkClass}>
-                Tablets
-              </NavLink>
-              <NavLink to="/accessories" className={getNavLinkClass}>
-                Accessoaries
-              </NavLink>
+              </NavItem>
+              <NavItem to="/phones">Phones</NavItem>
+              <NavItem to="/tablets">Tablets</NavItem>
+              <NavItem to="/accessories">Accessories</NavItem>
             </nav>
           </div>
 
           <div className={styles.actions}>
-            <NavLink to="/favorites" className={styles.iconLink}>
-              <Icon name="heart" />
-            </NavLink>
-            <NavLink to="/cart" className={styles.iconLink}>
-              <Icon name="cart" />
-            </NavLink>
+            <div className={styles.iconActions}>
+              <NavLink to="/favorites" className={styles.iconLink}>
+                <Icon name="heart" />
+              </NavLink>
+              <NavLink to="/cart" className={styles.iconLink}>
+                <Icon name="cart" />
+              </NavLink>
+            </div>
             <button
               type="button"
               className={styles.burgerButton}
-              onClick={() => setIsMenuIsOpen(true)}
+              onClick={() => setMenuIsOpen(true)}
               aria-label="Open menu"
             >
               <Icon name="menu" />

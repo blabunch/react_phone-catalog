@@ -10,7 +10,7 @@
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  height: 56px;
+  height: 64px;
   max-width: var(--container-width);
   margin: 0 auto;
 }
@@ -29,7 +29,6 @@
   letter-spacing: -0.01em;
   text-transform: uppercase;
   color: var(--color-primary);
-  border-right: 1px solid var(--color-elements);
   white-space: nowrap;
 }
 
@@ -55,9 +54,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-primary);
-  border-bottom: 2px solid transparent;
-  transition: color var(--transition-duration) ease,
-    border-color var(--transition-duration) ease;
+  transition: color var(--transition-duration) ease;
 
   &:hover {
     color: var(--color-secondary);
@@ -68,23 +65,55 @@
   border-bottom-color: var(--color-primary);
 }
 
+.navLinkText {
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.navLinkActive .navLinkText::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+}
+
 .actions {
   display: flex;
   align-items: stretch;
 }
 
+.iconActions {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+
+  @media (max-width: 639px) {
+    display: none;
+  }
+}
+
 .iconLink {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  border-left: 1px solid var(--color-elements);
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--color-icons);
   color: var(--color-primary);
-  transition: background-color var(--transition-duration) ease;
+  transition:
+    background-color var(--transition-duration) ease,
+    border-color var(--transition-duration) ease;
+
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
 
   &:hover {
     background-color: var(--color-hover-bg);
+    border-color: var(--color-primary);
   }
 }
 
@@ -92,10 +121,10 @@
   font-size: 18px;
 }
 
-.burgerButton{
+.burgerButton {
   display: none;
   align-items: center;
-  justify-self: center;
+  justify-content: center;
   width: 56px;
   border-left: 1px solid var(--color-elements);
   color: var(--color-primary);
@@ -105,7 +134,7 @@
   }
 }
 
-.mobileMenu{
+.mobileMenu {
   position: fixed;
   inset: 0;
   z-index: 200;
