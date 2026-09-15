@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
-//import { HomePage } from './modules/HomePage/HomePage';
+import { HomePage } from './modules/HomePage/HomePage';
 //import { CatalogPage } from './modules/CatalogPage/CatalogPage';
 // eslint-disable-next-line max-len
 //import { ProductDetailsPage } from './modules/ProductDetailsPage/ProductDetailsPage';
@@ -11,11 +11,11 @@ import './App.scss';
 
 export const App = () => {
   return (
-    <BrowserRouter basename="/react_phone-catalog/">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<HomePage />} />
-          <Route path="phones" element={<CatalogPage category="phones" />} />
+          <Route index element={<HomePage />} />
+          {/* <Route path="phones" element={<CatalogPage category="phones" />} />
           <Route path="tablets" element={<CatalogPage category="tablets" />} />
           <Route
             path="accessories"
