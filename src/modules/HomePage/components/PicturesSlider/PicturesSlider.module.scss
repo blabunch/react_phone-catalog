@@ -1,0 +1,73 @@
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.slidesWrapper {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.slidesTrack {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.slideImage {
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+  aspect-ratio: 16 / 6;
+}
+
+.arrow {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-primary);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-icons);
+  border-radius: 50%;
+  transition: background-color var(--transition-duration) ease;
+
+  &:hover {
+    background-color: var(--color-hover-bg);
+  }
+}
+
+.arrowLeft {
+  left: 8px;
+}
+
+.arrowRight {
+  right: 8px;
+}
+
+.dashes {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  display: flex;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.dash {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-white);
+  opacity: 0.5;
+  border-radius: 50%;
+  transition: opacity var(--transition-duration) ease;
+
+  &.dashActive {
+    opacity: 1;
+  }
+}
