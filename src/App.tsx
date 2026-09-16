@@ -3,7 +3,7 @@ import { Layout } from './components/Layout/Layout';
 import { HomePage } from './modules/HomePage/HomePage';
 import { CatalogPage } from './modules/CatalogPage/CatalogPage';
 // eslint-disable-next-line max-len
-//import { ProductDetailsPage } from './modules/ProductDetailsPage/ProductDetailsPage';
+import { ProductDetailsPage } from './modules/ProductDetailsPage/ProductDetailsPage';
 //import { NotFoundPage } from './modules/NotFoundPage/NotFoundPage';
 //import { CartPage } from './modules/CartPage/CartPage';
 //import { FavoritesPage } from './modules/FavoritesPage/FavoritesPage';
@@ -21,8 +21,8 @@ export const App = () => {
             path="accessories"
             element={<CatalogPage category="accessories" />}
           />
-          {/*<Route path="product/:productId" element={<ProductDetailsPage />} />
-          <Route path="cart" element={<CartPage />} />
+          <Route path="product/:productId" element={<ProductDetailsPage />} />
+          {/*<Route path="cart" element={<CartPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} /> */}
         </Route>

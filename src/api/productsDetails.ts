@@ -50,3 +50,13 @@ export const getSuggestedProducts = async (
 
   return shuffled.slice(0, count);
 };
+
+export const getProductVariants = async (
+  category: Category,
+  namespaceId: string,
+): Promise<ProductDetails[]> => {
+  const fileName = categoryFileMap[category];
+  const items = await request<ProductDetails[]>(`${BASE_URL}/${fileName}`);
+
+  return items.filter(item => item.namespaceId === namespaceId);
+};
