@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Product } from '../../types/Product';
 import { Icon } from '../Icon/Icon';
 import { useCart } from '../../context/CartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 import { formatPrice } from '../../utils/formatPrice';
 import styles from './ProductCard.module.scss';
 
@@ -17,8 +18,8 @@ export const ProductCard = ({ product }: Props) => {
   const { addToCart, isInCart } = useCart();
   const inCart = isInCart(itemId);
 
-  // isFavorite поки лишаємо заглушкою — це наступний крок (Фаза 9)
-  const isFavorite = false;
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const favorite = isFavorite(itemId);
 
   const handleAddToCart = () => {
     if (!inCart) {
@@ -27,7 +28,7 @@ export const ProductCard = ({ product }: Props) => {
   };
 
   const handleToggleFavorite = () => {
-    // TODO: підключити FavoritesContext
+    toggleFavorite(product);
   };
 
   return (
@@ -79,11 +80,11 @@ export const ProductCard = ({ product }: Props) => {
 
         <button
           type="button"
-          className={`${styles.favoriteButton} ${isFavorite ? styles.favoriteActive : ''}`}
+          className={`${styles.favoriteButton} ${favorite ? styles.favoriteActive : ''}`}
           onClick={handleToggleFavorite}
           aria-label="Add to favorites"
         >
-          <Icon name={isFavorite ? 'heartFilled' : 'heart'} />
+          <Icon name={favorite ? 'heartFilled' : 'heart'} />
         </button>
       </div>
     </div>

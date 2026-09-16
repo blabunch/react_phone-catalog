@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
 import { useCart } from '../../context/CartContext';
-import { IconWithBadge } from '../IconWithBadge/';
+import { IconWithBadge } from '../IconWithBadge/IconWithBadge';
+import { useFavorites } from '../../context/FavoritesContext';
 import styles from './Header.module.scss';
 
 const NavItem = ({
@@ -35,6 +36,8 @@ export const Header = () => {
 
   const { totalCount } = useCart();
 
+  const { totalCount: favoritesCount } = useFavorites();
+
   return (
     <>
       <header className={styles.header}>
@@ -57,7 +60,7 @@ export const Header = () => {
           <div className={styles.actions}>
             <div className={styles.iconActions}>
               <NavLink to="/favorites" className={styles.iconLink}>
-                <Icon name="heart" />
+                <IconWithBadge name="heart" count={favoritesCount} />
               </NavLink>
               <NavLink to="/cart" className={styles.iconLink}>
                 <IconWithBadge name="cart" count={totalCount} />
@@ -124,7 +127,7 @@ export const Header = () => {
           </nav>
           <div className={styles.mobileMenuFooter}>
             <NavLink to="/favorites" className={styles.iconLink}>
-              <Icon name="heart" />
+              <IconWithBadge name="heart" count={favoritesCount} />
             </NavLink>
             <NavLink to="/cart" className={styles.iconLink}>
               <IconWithBadge name="cart" count={totalCount} />
