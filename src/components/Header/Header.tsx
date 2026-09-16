@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../Icon/Icon';
+import { useCart } from '../../context/CartContext';
+import { IconWithBadge } from '../IconWithBadge/';
 import styles from './Header.module.scss';
 
 const NavItem = ({
@@ -31,6 +33,8 @@ export const Header = () => {
 
   const closeMenu = () => setMenuIsOpen(false);
 
+  const { totalCount } = useCart();
+
   return (
     <>
       <header className={styles.header}>
@@ -56,7 +60,7 @@ export const Header = () => {
                 <Icon name="heart" />
               </NavLink>
               <NavLink to="/cart" className={styles.iconLink}>
-                <Icon name="cart" />
+                <IconWithBadge name="cart" count={totalCount} />
               </NavLink>
             </div>
             <button
@@ -123,7 +127,7 @@ export const Header = () => {
               <Icon name="heart" />
             </NavLink>
             <NavLink to="/cart" className={styles.iconLink}>
-              <Icon name="cart" />
+              <IconWithBadge name="cart" count={totalCount} />
             </NavLink>
           </div>
         </div>

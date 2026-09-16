@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Product } from '../../types/Product';
 import { Icon } from '../Icon/Icon';
+import { useCart } from '../../context/CartContext';
 import { formatPrice } from '../../utils/formatPrice';
 import styles from './ProductCard.module.scss';
 
@@ -11,15 +12,18 @@ type Props = {
 export const ProductCard = ({ product }: Props) => {
   const { itemId, name, image, price, fullPrice, screen, capacity, ram } =
     product;
-
   const hasDiscount = fullPrice > price;
 
-  // Тимчасові заглушки — замінимо на реальну логіку в Фазі 8-9
-  const isInCart = false;
+  const { addToCart, isInCart } = useCart();
+  const inCart = isInCart(itemId);
+
+  // isFavorite поки лишаємо заглушкою — це наступний крок (Фаза 9)
   const isFavorite = false;
 
   const handleAddToCart = () => {
-    // TODO: підключити CartContext
+    if (!inCart) {
+      addToCart(product);
+    }
   };
 
   const handleToggleFavorite = () => {
@@ -67,10 +71,10 @@ export const ProductCard = ({ product }: Props) => {
       <div className={styles.actions}>
         <button
           type="button"
-          className={`${styles.addToCartButton} ${isInCart ? styles.added : ''}`}
+          className={`${styles.addToCartButton} ${inCart ? styles.added : ''}`}
           onClick={handleAddToCart}
         >
-          {isInCart ? 'Added to cart' : 'Add to cart'}
+          {inCart ? 'Added to cart' : 'Add to cart'}
         </button>
 
         <button

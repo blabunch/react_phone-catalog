@@ -1,0 +1,60 @@
+import { CartItem as CartItemType } from '../../../../types/Cart';
+import { useCart } from '../../../../context/CartContext';
+import { Icon } from '../../../../components/Icon/Icon';
+import { formatPrice } from '../../../../utils/formatPrice';
+import styles from './CartItem.module.scss';
+
+type Props = {
+  item: CartItemType;
+};
+
+export const CartItem = ({ item }: Props) => {
+  const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
+  const { id, quantity, product } = item;
+
+  return (
+    <li className={styles.item}>
+      <button
+        type="button"
+        className={styles.removeButton}
+        onClick={() => removeFromCart(id)}
+        aria-label="Remove from cart"
+      >
+        <Icon name="close" />
+      </button>
+
+      <img
+        src={`${import.meta.env.BASE_URL}${product.image}`}
+        alt={product.name}
+        className={styles.image}
+      />
+
+      <span className={styles.name}>{product.name}</span>
+
+      <div className={styles.quantityControls}>
+        <button
+          type="button"
+          className={styles.quantityButton}
+          onClick={() => decreaseQuantity(id)}
+          disabled={quantity === 1}
+          aria-label="Decrease quantity"
+        >
+          <Icon name="minus" />
+        </button>
+        <span className={styles.quantityValue}>{quantity}</span>
+        <button
+          type="button"
+          className={styles.quantityButton}
+          onClick={() => increaseQuantity(id)}
+          aria-label="Increase quantity"
+        >
+          <Icon name="plus" />
+        </button>
+      </div>
+
+      <span className={styles.price}>
+        {formatPrice(product.price * quantity)}
+      </span>
+    </li>
+  );
+};
