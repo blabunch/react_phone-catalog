@@ -4,7 +4,16 @@ import { Icon } from '../Icon/Icon';
 import { useCart } from '../../context/CartContext';
 import { IconWithBadge } from '../IconWithBadge/IconWithBadge';
 import { useFavorites } from '../../context/FavoritesContext';
+import { useLocation } from 'react-router-dom';
+import { SearchInput } from '../SearchInput';
 import styles from './Header.module.scss';
+
+const SEARCH_PLACEHOLDERS: Record<string, string> = {
+  '/phones': 'Search in phones...',
+  '/tablets': 'Search in tablets...',
+  '/accessories': 'Search in accessories...',
+  '/favorites': 'Search in favourites...',
+};
 
 const NavItem = ({
   to,
@@ -38,6 +47,10 @@ export const Header = () => {
 
   const { totalCount: favoritesCount } = useFavorites();
 
+  const location = useLocation();
+
+  const searchPlaceholder = SEARCH_PLACEHOLDERS[location.pathname];
+
   return (
     <>
       <header className={styles.header}>
@@ -56,6 +69,12 @@ export const Header = () => {
               <NavItem to="/accessories">Accessories</NavItem>
             </nav>
           </div>
+
+          {searchPlaceholder && (
+            <div className={styles.searchWrapper}>
+              <SearchInput placeholder={searchPlaceholder} />
+            </div>
+          )}
 
           <div className={styles.actions}>
             <div className={styles.iconActions}>

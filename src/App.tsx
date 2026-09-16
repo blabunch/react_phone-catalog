@@ -6,7 +6,7 @@ import { CatalogPage } from './modules/CatalogPage/CatalogPage';
 import { ProductDetailsPage } from './modules/ProductDetailsPage/ProductDetailsPage';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
-//import { NotFoundPage } from './modules/NotFoundPage/NotFoundPage';
+import { NotFoundPage } from './modules/NotFoundPage/NotFoundPage';
 import { CartPage } from './modules/CartPage/CartPage';
 import { FavoritesPage } from './modules/FavoritesPage/FavoritesPage';
 import './App.scss';
@@ -37,7 +37,7 @@ export const App = () => {
               />
               <Route path="cart" element={<CartPage />} />
               <Route path="favorites" element={<FavoritesPage />} />
-              {/* <Route path="*" element={<NotFoundPage />} /> */}
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

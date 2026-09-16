@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/indent */
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { getProducts } from '../../api/products';
@@ -42,6 +43,7 @@ export const CatalogPage = ({ category }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sort = (searchParams.get('sort') as SortValue) || 'age';
+  const query = searchParams.get('query') || '';
   const page = Number(searchParams.get('page')) || 1;
   const perPageParam = searchParams.get('perPage') || 'all';
 
@@ -62,7 +64,11 @@ export const CatalogPage = ({ category }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
-  const sortedProducts = sortProducts(products, sort);
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(query.toLowerCase()),
+  );
+
+  const sortedProducts = sortProducts(filteredProducts, sort);
   const perPage =
     perPageParam === 'all' ? sortedProducts.length : Number(perPageParam);
   const totalPages =
@@ -135,7 +141,16 @@ export const CatalogPage = ({ category }: Props) => {
         <StatusMessage message={`There are no ${category} yet`} />
       )}
 
-      {!isLoading && !hasError && products.length > 0 && (
+      {!isLoading &&
+        !hasError &&
+        products.length > 0 &&
+        filteredProducts.length === 0 && (
+          <StatusMessage
+            message={`There are no ${category} matching the query`}
+          />
+        )}
+
+      {!isLoading && !hasError && filteredProducts.length > 0 && (
         <>
           <div className={styles.controls}>
             <label className={styles.control}>
