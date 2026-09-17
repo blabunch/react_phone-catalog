@@ -45,44 +45,57 @@ export const ProductVariantPicker = ({ product, variants }: Props) => {
 
   return (
     <div className={styles.picker}>
-      <div className={styles.group}>
-        <span className={styles.label}>Available colors</span>
+      <fieldset className={styles.group}>
+        <legend className={styles.label}>Available colors</legend>
         <div className={styles.colorOptions}>
           {product.colorsAvailable.map(color => (
-            <button
+            <label
               key={color}
-              type="button"
               className={`${styles.colorOption} ${
                 color === product.color ? styles.colorOptionActive : ''
               }`}
               style={{ backgroundColor: colorHexMap[color] || color }}
-              onClick={() => handleColorSelect(color)}
-              aria-label={color}
               title={color}
-            />
+            >
+              <input
+                type="radio"
+                name="color"
+                value={color}
+                checked={color === product.color}
+                onChange={() => handleColorSelect(color)}
+                className={styles.radioInput}
+                aria-label={color}
+              />
+            </label>
           ))}
         </div>
-      </div>
+      </fieldset>
 
       <div className={styles.divider} />
 
-      <div className={styles.group}>
-        <span className={styles.label}>Select capacity</span>
+      <fieldset className={styles.group}>
+        <legend className={styles.label}>Select capacity</legend>
         <div className={styles.capacityOptions}>
           {product.capacityAvailable.map(capacity => (
-            <button
+            <label
               key={capacity}
-              type="button"
               className={`${styles.capacityOption} ${
                 capacity === product.capacity ? styles.capacityOptionActive : ''
               }`}
-              onClick={() => handleCapacitySelect(capacity)}
             >
+              <input
+                type="radio"
+                name="capacity"
+                value={capacity}
+                checked={capacity === product.capacity}
+                onChange={() => handleCapacitySelect(capacity)}
+                className={styles.radioInput}
+              />
               {capacity}
-            </button>
+            </label>
           ))}
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 };

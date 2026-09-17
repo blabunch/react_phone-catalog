@@ -235,3 +235,14 @@
     color: var(--color-primary);
   }
 }
+
+.added {
+  color: var(--color-green);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-green);
+}
+
+.favoriteActive {
+  color: var(--color-red);
+  border-color: var(--color-red);
+}

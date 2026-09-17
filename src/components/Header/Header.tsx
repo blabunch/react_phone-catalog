@@ -57,7 +57,7 @@ export const Header = () => {
         <div className={styles.content}>
           <div className={styles.left}>
             <NavLink to="/" className={styles.logo}>
-              NICE<span className={styles.logoAccent}>⚡</span>GADGETS
+              <Icon name="logo" />
             </NavLink>
 
             <nav className={styles.nav}>
@@ -100,8 +100,8 @@ export const Header = () => {
       {isMenuOpen && (
         <div className={styles.mobileMenu}>
           <div className={styles.mobileMenuHeader}>
-            <NavLink to="/" className={styles.logo} onClick={closeMenu}>
-              NICE<span className={styles.logoAccent}>⚡</span>GADGETS
+            <NavLink to="/" className={styles.logo}>
+              <Icon name="logo" />
             </NavLink>
             <button
               type="button"
@@ -145,10 +145,18 @@ export const Header = () => {
             </NavLink>
           </nav>
           <div className={styles.mobileMenuFooter}>
-            <NavLink to="/favorites" className={styles.iconLink}>
+            <NavLink
+              to="/favorites"
+              className={styles.mobileIconLink}
+              onClick={closeMenu}
+            >
               <IconWithBadge name="heart" count={favoritesCount} />
             </NavLink>
-            <NavLink to="/cart" className={styles.iconLink}>
+            <NavLink
+              to="/cart"
+              className={styles.mobileIconLink}
+              onClick={closeMenu}
+            >
               <IconWithBadge name="cart" count={totalCount} />
             </NavLink>
           </div>

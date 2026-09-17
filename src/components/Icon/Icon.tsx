@@ -12,6 +12,7 @@ import ChevronRightIcon from '../../assets/icons/Chevron (Arrow Right).svg?react
 import ChevronDownIcon from '../../assets/icons/Chevron (Arrow Down).svg?react';
 import ChevronUpIcon from '../../assets/icons/Chevron (Arrow Up).svg?react';
 import MenuIcon from '../../assets/icons/Menu.svg?react';
+import LogoIcon from '../../assets/icons/Logo.svg?react';
 import styles from './Icon.module.scss';
 
 export type IconName =
@@ -27,7 +28,8 @@ export type IconName =
   | 'chevronRight'
   | 'chevronDown'
   | 'chevronUp'
-  | 'menu';
+  | 'menu'
+  | 'logo';
 
 const icons: Record<IconName, React.FC<React.SVGProps<SVGSVGElement>>> = {
   home: HomeIcon,
@@ -43,6 +45,7 @@ const icons: Record<IconName, React.FC<React.SVGProps<SVGSVGElement>>> = {
   chevronDown: ChevronDownIcon,
   chevronUp: ChevronUpIcon,
   menu: MenuIcon,
+  logo: LogoIcon,
 };
 
 type Props = {

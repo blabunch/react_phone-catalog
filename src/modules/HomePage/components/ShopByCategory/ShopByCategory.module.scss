@@ -6,7 +6,7 @@
   font-weight: 700;
   font-size: var(--fs-h2);
   color: var(--color-primary);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .list {
@@ -26,7 +26,7 @@
 .imageLink {
   display: block;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   border-radius: 4px;
   background-color: var(--color-hover-bg);
 }
@@ -34,7 +34,7 @@
 .image {
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform var(--transition-duration) ease;
 
   &:hover {
@@ -43,13 +43,13 @@
 }
 
 .categoryTitle {
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--fs-h4);
   color: var(--color-primary);
   margin-bottom: 4px;
 }
 
 .categoryCount {
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   color: var(--color-secondary);
 }

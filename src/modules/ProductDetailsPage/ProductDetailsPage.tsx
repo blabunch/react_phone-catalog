@@ -14,6 +14,9 @@ import { ImageGallery } from './components/ImageGallery';
 import { ProductVariantPicker } from './components/ProductVariantPicker';
 import { ProductsSlider } from '../HomePage/components/ProductsSlider';
 import styles from './ProductDetailsPage.module.scss';
+import { getProducts } from '../../api/products';
+import { useCart } from '../../context/CartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 
 const categoryTitles: Record<string, string> = {
   phones: 'Phones',
@@ -26,10 +29,14 @@ export const ProductDetailsPage = () => {
   const navigate = useNavigate();
 
   const [product, setProduct] = useState<ProductDetails | null>(null);
+  const [shortProduct, setShortProduct] = useState<Product | null>(null);
   const [variants, setVariants] = useState<ProductDetails[]>([]);
   const [suggested, setSuggested] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+
+  const { addToCart, removeFromCart, isInCart } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
     if (!productId) {
@@ -49,17 +56,43 @@ export const ProductDetailsPage = () => {
 
         setProduct(data);
 
-        const [variantsData, suggestedData] = await Promise.all([
+        const [variantsData, suggestedData, allProducts] = await Promise.all([
           getProductVariants(data.category, data.namespaceId),
           getSuggestedProducts(data.category, data.id),
+          getProducts(),
         ]);
 
         setVariants(variantsData);
         setSuggested(suggestedData);
+
+        const matchedShortProduct = allProducts.find(p => p.itemId === data.id);
+
+        setShortProduct(matchedShortProduct || null);
       })
       .catch(() => setNotFound(true))
       .finally(() => setIsLoading(false));
   }, [productId]);
+
+  const inCart = shortProduct ? isInCart(shortProduct.itemId) : false;
+  const favorite = shortProduct ? isFavorite(shortProduct.itemId) : false;
+
+  const handleAddToCart = () => {
+    if (!shortProduct) {
+      return;
+    }
+
+    if (inCart) {
+      removeFromCart(shortProduct.itemId);
+    } else {
+      addToCart(shortProduct);
+    }
+  };
+
+  const handleToggleFavorite = () => {
+    if (shortProduct) {
+      toggleFavorite(shortProduct);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -116,15 +149,20 @@ export const ProductDetailsPage = () => {
           </div>
 
           <div className={styles.actions}>
-            <button type="button" className={styles.addToCartButton}>
-              Add to cart
+            <button
+              type="button"
+              className={`${styles.addToCartButton} ${inCart ? styles.added : ''}`}
+              onClick={handleAddToCart}
+            >
+              {inCart ? 'Added to cart' : 'Add to cart'}
             </button>
             <button
               type="button"
-              className={styles.favoriteButton}
+              className={`${styles.favoriteButton} ${favorite ? styles.favoriteActive : ''}`}
+              onClick={handleToggleFavorite}
               aria-label="Add to favorites"
             >
-              <Icon name="heart" />
+              <Icon name={favorite ? 'heartFilled' : 'heart'} />
             </button>
           </div>
 
