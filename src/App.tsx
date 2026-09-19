@@ -15,7 +15,7 @@ export const App = () => {
   return (
     <CartProvider>
       <FavoritesProvider>
-        <BrowserRouter basename="/react_phone-catalog">
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
