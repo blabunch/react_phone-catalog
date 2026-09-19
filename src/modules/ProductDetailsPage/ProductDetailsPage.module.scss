@@ -2,7 +2,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 24px 0 16px;
+  margin: 24px 0 40px;
+
+   @media (max-width: 639px){
+    margin: 24px 0
+  }
+
 }
 
 .breadcrumbHome {
@@ -22,17 +27,23 @@
 }
 
 .breadcrumbLink {
-  font-size: var(--fs-small);
-  color: var(--color-secondary);
+  font-size: var(--fs-uppercase);
+  color: var(--color-primary);
 
   &:hover {
-    color: var(--color-primary);
+    color: var(--color-secondary);
   }
 }
 
 .breadcrumbCurrent {
-  font-size: var(--fs-small);
-  color: var(--color-primary);
+  font-size: var(--fs-uppercase);
+  color: var(--color-secondary);
+
+  @media(max-width: 639px){
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
 }
 
 .backButton {
@@ -40,9 +51,10 @@
   align-items: center;
   gap: 4px;
   font-weight: 600;
-  font-size: var(--fs-buttons);
+  font-size: var(--fs-uppercase);
   color: var(--color-secondary);
   margin-bottom: 16px;
+  background-color: transparent;
 
   svg {
     width: 16px;
@@ -55,8 +67,8 @@
 }
 
 .title {
-  font-weight: 700;
-  font-size: var(--fs-h3);
+  font-weight: 800;
+  font-size: var(--fs-h2);
   color: var(--color-primary);
   margin-bottom: 32px;
 }
@@ -68,13 +80,13 @@
   margin-bottom: 80px;
 
   @media (max-width: 1199px) {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    // grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 40px;
   }
 
   @media (max-width: 639px) {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
+    gap: 40px;
   }
 }
 
@@ -112,7 +124,7 @@
 .addToCartButton {
   flex: 1;
   height: 40px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--fs-buttons);
   color: var(--color-white);
   background-color: var(--color-primary);
@@ -148,7 +160,7 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  font-size: var(--fs-small);
+  font-size: var(--fs-body);
 
   dt {
     color: var(--color-secondary);
@@ -183,7 +195,7 @@
 }
 
 .sectionTitle {
-  font-weight: 700;
+  font-weight: 800;
   font-size: var(--fs-h3);
   color: var(--color-primary);
   margin-bottom: 16px;
@@ -192,25 +204,26 @@
 .divider {
   height: 1px;
   background-color: var(--color-elements);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .descriptionBlock {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .descriptionTitle {
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--fs-h4);
   color: var(--color-primary);
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .descriptionText {
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
+  font-weight: 500;
+  font-size: var(--fs-small);
   color: var(--color-secondary);
   margin-bottom: 8px;
+  line-height: 21px;
 }
 
 .specsList {
@@ -222,16 +235,15 @@
 .specsRow {
   display: flex;
   justify-content: space-between;
-  font-size: var(--fs-body);
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--color-elements);
+  font-size: var(--fs-small);
+  padding-bottom: 8px;
 
   dt {
     color: var(--color-secondary);
   }
 
   dd {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--color-primary);
   }
 }

@@ -1,5 +1,13 @@
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 80px;
+
+  @media (max-width: 1199px) {
+    margin-bottom: 64px ;
+  }
+
+    @media (max-width: 639px) {
+    margin-bottom: 56px ;
+  }
 }
 
 .title {
@@ -35,6 +43,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
+  background-color: transparent;
   transition: transform var(--transition-duration) ease;
 
   &:hover {

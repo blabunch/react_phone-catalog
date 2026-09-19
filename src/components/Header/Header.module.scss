@@ -37,13 +37,13 @@
   }
 
     svg {
-    width: 128px;
-    height: 64px;
+    width: 80px;
+    height: 28px;
     transition: width var(--transition-duration) ease, height var(--transition-duration) ease;
 
     @media (max-width: 1199px) {
-      width: 96px;
-      height: 48px;
+      width: 64px;
+      height: 22px;
     }
   }
 }
@@ -58,6 +58,7 @@
 }
 
 .navLink {
+  position: relative;
   display: flex;
   align-items: center;
   padding-right: 64px;
@@ -69,7 +70,7 @@
   transition: color var(--transition-duration) ease;
 
   @media (max-width: 1199px) {
-    padding: 0 16px;
+    padding: 0 32px;
   }
 
   &:hover {
@@ -77,23 +78,23 @@
   }
 }
 
-.navLinkActive {
-  border-bottom-color: var(--color-primary);
+.navLinkActive::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 64px;
+  bottom: 0;
+  height: 3px;
+  background-color: var(--color-primary);
+
+  @media (max-width: 1199px) {
+    left: 32px;
+    right: 32px;
+  }
 }
 
 .navLinkText {
   position: relative;
-  padding-bottom: 6px;
-}
-
-.navLinkActive .navLinkText::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 3px;
-  background-color: var(--color-primary);
 }
 
 .actions {

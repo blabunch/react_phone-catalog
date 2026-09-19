@@ -29,7 +29,7 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="container">
+    <div className={`container ${styles.page}`}>
       <h1 className="visually-hidden">Product Catalog</h1>
       <h2 className={styles.heading}>Welcome to Nice Gadgets store!</h2>
 

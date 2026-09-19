@@ -5,7 +5,8 @@
   font-weight: 600;
   font-size: var(--fs-buttons);
   color: var(--color-secondary);
-  margin: 24px 0 16px;
+  margin: 40px 0 16px;
+  background-color: transparent;
 
   svg {
     width: 16px;
@@ -54,7 +55,7 @@
   width: 100%;
   max-width: 360px;
   padding: 24px;
-  border: 1px solid var(--color-elements);
+  border: 1px solid #E2E6E9;
 
   @media (max-width: 1199px) {
     max-width: 100%;
@@ -70,7 +71,8 @@
 .totalCount {
   font-size: var(--fs-body);
   color: var(--color-secondary);
-  margin-bottom: 16px;
+  margin-bottom: 49px;
+
 }
 
 .checkoutButton {
@@ -80,6 +82,7 @@
   font-size: var(--fs-buttons);
   color: var(--color-white);
   background-color: var(--color-primary);
+  border-top: 1px solid #E2E6E9;
   transition: background-color var(--transition-duration) ease;
 
   &:hover {

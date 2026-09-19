@@ -1,9 +1,20 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--color-elements);
+  gap: 24px;
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1px solid #E2E6E9;
+
+  @media (max-width: 639px) {
+    display: grid;
+    grid-template:
+      'remove image name  name' auto
+      'qty    qty   qty   price' auto
+      / 32px 80px 1fr 1fr;
+    gap: 16px;
+    padding: 16px;
+  }
 }
 
 .removeButton {
@@ -13,37 +24,59 @@
   width: 32px;
   height: 32px;
   color: var(--color-icons);
-  border: 1px solid var(--color-elements);
+  background-color: transparent;
   transition: color var(--transition-duration) ease,
     border-color var(--transition-duration) ease;
 
   svg {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
   }
 
   &:hover {
-    color: var(--color-primary);
+    color: var(--color-praimary);
     border-color: var(--color-primary);
+  }
+
+  @media (max-width: 639px) {
+    grid-area: remove;
+    place-self: center start;
   }
 }
 
 .image {
-  width: 56px;
-  height: 56px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
+
+  @media (max-width: 639px) {
+    grid-area: image;
+    width: 80px;
+    height: 80px;
+    align-self: start;
+  }
 }
 
 .name {
   flex: 1;
   font-size: var(--fs-body);
   color: var(--color-primary);
+
+  @media (max-width: 639px) {
+    grid-area: name;
+    align-self: start;
+  }
 }
 
 .quantityControls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
+
+  @media (max-width: 639px) {
+    grid-area: qty;
+    place-self: center start;
+  }
 }
 
 .quantityButton {
@@ -55,13 +88,13 @@
   color: var(--color-primary);
   background-color: var(--color-white);
   border: 1px solid var(--color-icons);
-  border-radius: 0; // квадратні, як у макеті
+  border-radius: 0;
   transition: background-color var(--transition-duration) ease,
     border-color var(--transition-duration) ease;
 
   svg {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
   }
 
   &:disabled {
@@ -91,4 +124,10 @@
   font-weight: 700;
   font-size: var(--fs-h4);
   color: var(--color-primary);
+
+  @media (max-width: 639px) {
+    grid-area: price;
+    place-self: center end;
+    min-width: auto;
+  }
 }
