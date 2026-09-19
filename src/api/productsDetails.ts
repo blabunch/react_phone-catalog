@@ -2,7 +2,9 @@ import { ProductDetails } from '../types/ProductDetails';
 import { Category, Product } from '../types/Product';
 import { getProducts } from './products';
 
-const BASE_URL = `${import.meta.env.BASE_URL}api`;
+// ВИПРАВЛЕНО: Безпечне формування базового шляху
+const baseUrl = import.meta.env.BASE_URL;
+const BASE_URL = baseUrl.endsWith('/') ? `${baseUrl}api` : `${baseUrl}/api`;
 
 const categoryFileMap: Record<Category, string> = {
   phones: 'phones.json',

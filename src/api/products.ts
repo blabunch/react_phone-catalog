@@ -1,6 +1,8 @@
 import { Product } from '../types/Product';
 
-const BASE_URL = `${import.meta.env.BASE_URL}api`;
+// ВИПРАВЛЕНО: Безпечне формування базового шляху
+const baseUrl = import.meta.env.BASE_URL;
+const BASE_URL = baseUrl.endsWith('/') ? `${baseUrl}api` : `${baseUrl}/api`;
 
 async function request<T>(url: string): Promise<T> {
   const response = await fetch(url);

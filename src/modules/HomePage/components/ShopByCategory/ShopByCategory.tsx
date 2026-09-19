@@ -8,6 +8,17 @@ type CategoryItem = {
   image: string;
 };
 
+const getImageUrl = (path: string) => {
+  const baseUrl = import.meta.env.BASE_URL;
+  const cleanPath = path.startsWith('public/')
+    ? path.replace('public/', '')
+    : path;
+
+  return baseUrl.endsWith('/')
+    ? `${baseUrl}${cleanPath}`
+    : `${baseUrl}/${cleanPath}`;
+};
+
 const categories: CategoryItem[] = [
   {
     category: 'phones',
@@ -36,7 +47,7 @@ export const ShopByCategory = ({ counts }: Props) => {
           <li key={category} className={styles.item}>
             <Link to={`/${category}`} className={styles.imageLink}>
               <img
-                src={`${import.meta.env.BASE_URL}${image}`}
+                src={getImageUrl(image)}
                 alt={title}
                 className={styles.image}
               />

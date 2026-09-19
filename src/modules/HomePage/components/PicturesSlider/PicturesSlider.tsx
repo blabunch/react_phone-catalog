@@ -13,6 +13,17 @@ const slides: Slide[] = [
   { image: 'img/banner-accessories.png', alt: 'Accessories banner' },
 ];
 
+const getImageUrl = (path: string) => {
+  const baseUrl = import.meta.env.BASE_URL;
+  const cleanPath = path.startsWith('public/')
+    ? path.replace('public/', '')
+    : path;
+
+  return baseUrl.endsWith('/')
+    ? `${baseUrl}${cleanPath}`
+    : `${baseUrl}/${cleanPath}`;
+};
+
 const AUTO_PLAY_INTERVAL = 5000;
 
 export const PicturesSlider = () => {
@@ -51,7 +62,7 @@ export const PicturesSlider = () => {
           {slides.map(slide => (
             <img
               key={slide.image}
-              src={`${import.meta.env.BASE_URL}${slide.image}`}
+              src={getImageUrl(slide.image)}
               alt={slide.alt}
               className={styles.slideImage}
             />
