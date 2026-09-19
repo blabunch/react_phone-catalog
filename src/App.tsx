@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import { HomePage } from './modules/HomePage/HomePage';
 import { CatalogPage } from './modules/CatalogPage/CatalogPage';
@@ -15,7 +15,7 @@ export const App = () => {
   return (
     <CartProvider>
       <FavoritesProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <HashRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<HomePage />} />
@@ -40,7 +40,7 @@ export const App = () => {
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </FavoritesProvider>
     </CartProvider>
   );
