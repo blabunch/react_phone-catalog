@@ -10,6 +10,17 @@ type Props = {
   product: Product;
 };
 
+const getImageUrl = (path: string) => {
+  const baseUrl = import.meta.env.BASE_URL;
+  const cleanPath = path.startsWith('public/')
+    ? path.replace('public/', '')
+    : path;
+
+  return baseUrl.endsWith('/')
+    ? `${baseUrl}${cleanPath}`
+    : `${baseUrl}/${cleanPath}`;
+};
+
 export const ProductCard = ({ product }: Props) => {
   const { itemId, name, image, price, fullPrice, screen, capacity, ram } =
     product;
@@ -34,11 +45,7 @@ export const ProductCard = ({ product }: Props) => {
   return (
     <div className={styles.card}>
       <Link to={`/product/${itemId}`} className={styles.imageLink}>
-        <img
-          src={`${import.meta.env.BASE_URL}${image}`}
-          alt={name}
-          className={styles.image}
-        />
+        <img src={getImageUrl(image)} alt={name} className={styles.image} />
       </Link>
 
       <Link to={`/product/${itemId}`} className={styles.name}>
