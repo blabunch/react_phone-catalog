@@ -8,6 +8,7 @@ import styles from './ProductCard.module.scss';
 
 type Props = {
   product: Product;
+  showDiscount?: boolean;
 };
 
 const getImageUrl = (path: string) => {
@@ -21,10 +22,12 @@ const getImageUrl = (path: string) => {
     : `${baseUrl}/${cleanPath}`;
 };
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ product, showDiscount = true }: Props) => {
   const { itemId, name, image, price, fullPrice, screen, capacity, ram } =
     product;
-  const hasDiscount = fullPrice > price;
+
+  const hasDiscount = showDiscount && fullPrice > price;
+  const displayPrice = showDiscount ? price : fullPrice;
 
   const { addToCart, isInCart } = useCart();
   const inCart = isInCart(itemId);
@@ -53,7 +56,8 @@ export const ProductCard = ({ product }: Props) => {
       </Link>
 
       <div className={styles.priceRow}>
-        <span className={styles.price}>{formatPrice(price)}</span>
+        <span className={styles.price}>{formatPrice(displayPrice)}</span>
+
         {hasDiscount && (
           <span className={styles.fullPrice}>{formatPrice(fullPrice)}</span>
         )}
@@ -66,10 +70,12 @@ export const ProductCard = ({ product }: Props) => {
           <dt className={styles.specsLabel}>Screen</dt>
           <dd className={styles.specsValue}>{screen}</dd>
         </div>
+
         <div className={styles.specsRow}>
           <dt className={styles.specsLabel}>Capacity</dt>
           <dd className={styles.specsValue}>{capacity}</dd>
         </div>
+
         <div className={styles.specsRow}>
           <dt className={styles.specsLabel}>RAM</dt>
           <dd className={styles.specsValue}>{ram}</dd>

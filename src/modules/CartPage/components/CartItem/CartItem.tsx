@@ -8,6 +8,17 @@ type Props = {
   item: CartItemType;
 };
 
+const getImageUrl = (path: string) => {
+  const baseUrl = import.meta.env.BASE_URL;
+  const cleanPath = path.startsWith('public/')
+    ? path.replace('public/', '')
+    : path;
+
+  return baseUrl.endsWith('/')
+    ? `${baseUrl}${cleanPath}`
+    : `${baseUrl}/${cleanPath}`;
+};
+
 export const CartItem = ({ item }: Props) => {
   const { removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
   const { id, quantity, product } = item;
@@ -24,7 +35,7 @@ export const CartItem = ({ item }: Props) => {
       </button>
 
       <img
-        src={`${import.meta.env.BASE_URL}${product.image}`}
+        src={getImageUrl(product.image)}
         alt={product.name}
         className={styles.image}
       />

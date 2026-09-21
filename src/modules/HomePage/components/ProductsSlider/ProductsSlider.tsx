@@ -7,15 +7,23 @@ import styles from './ProductsSlider.module.scss';
 type Props = {
   title: string;
   products: Product[];
+  showDiscount?: boolean;
 };
 
 const SCROLL_AMOUNT = 272;
 
-export const ProductsSlider = ({ title, products }: Props) => {
+export const ProductsSlider = ({
+  title,
+  products,
+  showDiscount = true,
+}: Props) => {
   const trackRef = useRef<HTMLUListElement>(null);
 
   const scrollByAmount = (amount: number) => {
-    trackRef.current?.scrollBy({ left: amount, behavior: 'smooth' });
+    trackRef.current?.scrollBy({
+      left: amount,
+      behavior: 'smooth',
+    });
   };
 
   if (products.length === 0) {
@@ -36,6 +44,7 @@ export const ProductsSlider = ({ title, products }: Props) => {
           >
             <Icon name="chevronLeft" />
           </button>
+
           <button
             type="button"
             className={styles.arrow}
@@ -50,7 +59,7 @@ export const ProductsSlider = ({ title, products }: Props) => {
       <ul className={styles.track} ref={trackRef}>
         {products.map(product => (
           <li key={product.id} className={styles.item}>
-            <ProductCard product={product} />
+            <ProductCard product={product} showDiscount={showDiscount} />
           </li>
         ))}
       </ul>

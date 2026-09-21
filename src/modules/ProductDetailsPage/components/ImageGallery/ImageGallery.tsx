@@ -6,6 +6,19 @@ type Props = {
   name: string;
 };
 
+const getImageUrl = (path: string) => {
+  const baseUrl = import.meta.env.BASE_URL;
+  let cleanPath = path.startsWith('public/')
+    ? path.replace('public/', '')
+    : path;
+
+  cleanPath = cleanPath.startsWith('/') ? cleanPath.slice(1) : cleanPath;
+
+  return baseUrl.endsWith('/')
+    ? `${baseUrl}${cleanPath}`
+    : `${baseUrl}/${cleanPath}`;
+};
+
 export const ImageGallery = ({ images, name }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -22,7 +35,7 @@ export const ImageGallery = ({ images, name }: Props) => {
             onClick={() => setActiveIndex(index)}
           >
             <img
-              src={`${import.meta.env.BASE_URL}${image}`}
+              src={getImageUrl(image)}
               alt={`${name} thumbnail ${index + 1}`}
               className={styles.thumbnailImage}
             />
@@ -32,7 +45,7 @@ export const ImageGallery = ({ images, name }: Props) => {
 
       <div className={styles.mainImageWrapper}>
         <img
-          src={`${import.meta.env.BASE_URL}${images[activeIndex]}`}
+          src={getImageUrl(images[activeIndex])}
           alt={name}
           className={styles.mainImage}
         />

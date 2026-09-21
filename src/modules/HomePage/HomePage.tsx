@@ -35,7 +35,11 @@ export const HomePage = () => {
 
       <PicturesSlider />
 
-      <ProductsSlider title="Brand new models" products={brandNewModels} />
+      <ProductsSlider
+        title="Brand new models"
+        products={brandNewModels}
+        showDiscount={false}
+      />
 
       <ShopByCategory counts={categoryCounts} />
 
