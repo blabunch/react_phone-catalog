@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { CartItem as CartItemType } from '../../../../types/Cart';
 import { useCart } from '../../../../context/CartContext';
 import { Icon } from '../../../../components/Icon/Icon';
@@ -34,13 +35,17 @@ export const CartItem = ({ item }: Props) => {
         <Icon name="close" />
       </button>
 
-      <img
-        src={getImageUrl(product.image)}
-        alt={product.name}
-        className={styles.image}
-      />
+      <Link to={`/product/${id}`} className={styles.imageLink}>
+        <img
+          src={getImageUrl(product.image)}
+          alt={product.name}
+          className={styles.image}
+        />
+      </Link>
 
-      <span className={styles.name}>{product.name}</span>
+      <Link to={`/product/${id}`} className={styles.name}>
+        {product.name}
+      </Link>
 
       <div className={styles.quantityControls}>
         <button

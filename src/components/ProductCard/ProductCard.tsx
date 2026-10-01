@@ -29,14 +29,16 @@ export const ProductCard = ({ product, showDiscount = true }: Props) => {
   const hasDiscount = showDiscount && fullPrice > price;
   const displayPrice = showDiscount ? price : fullPrice;
 
-  const { addToCart, isInCart } = useCart();
+  const { addToCart, removeFromCart, isInCart } = useCart();
   const inCart = isInCart(itemId);
 
   const { toggleFavorite, isFavorite } = useFavorites();
   const favorite = isFavorite(itemId);
 
   const handleAddToCart = () => {
-    if (!inCart) {
+    if (inCart) {
+      removeFromCart(itemId);
+    } else {
       addToCart(product);
     }
   };

@@ -36,6 +36,25 @@ const sortProducts = (products: Product[], sort: SortValue): Product[] => {
   }
 };
 
+const getPageNumbers = (
+  current: number,
+  total: number,
+): (number | 'dots')[] => {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  if (current <= 4) {
+    return [1, 2, 3, 4, 5, 'dots', total];
+  }
+
+  if (current >= total - 3) {
+    return [1, 'dots', total - 4, total - 3, total - 2, total - 1, total];
+  }
+
+  return [1, 'dots', current - 1, current, current + 1, 'dots', total];
+};
+
 export const CatalogPage = ({ category }: Props) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -195,18 +214,24 @@ export const CatalogPage = ({ category }: Props) => {
                 <Icon name="chevronLeft" />
               </button>
 
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
-                <button
-                  key={p}
-                  type="button"
-                  className={`${styles.pageButton} ${
-                    p === page ? styles.pageButtonActive : ''
-                  }`}
-                  onClick={() => goToPage(p)}
-                >
-                  {p}
-                </button>
-              ))}
+              {getPageNumbers(page, totalPages).map((p, index) =>
+                p === 'dots' ? (
+                  <span key={`dots-${index}`} className={styles.pageDots}>
+                    …
+                  </span>
+                ) : (
+                  <button
+                    key={p}
+                    type="button"
+                    className={`${styles.pageButton} ${
+                      p === page ? styles.pageButtonActive : ''
+                    }`}
+                    onClick={() => goToPage(p)}
+                  >
+                    {p}
+                  </button>
+                ),
+              )}
 
               <button
                 type="button"
